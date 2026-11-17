@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Firebase CRUD',
+      title: 'Firebase',
       theme: ThemeData(primarySwatch: Colors.teal),
       home: HomePage(),
     );

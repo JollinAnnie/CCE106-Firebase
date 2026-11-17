@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import 'auth_service.dart';
 import 'crud_service.dart';
-
+import 'login_page.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -15,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController nameCtrl = TextEditingController();
   final TextEditingController qtyCtrl = TextEditingController();
   late final Stream<QuerySnapshot> _items = service.getItems();
-  bool _showFavoritesOnly = false;
+  final bool _showFavoritesOnly = false;
 
   @override
   void dispose() {
@@ -34,12 +35,13 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.teal,
         actions: [
           IconButton(
-            tooltip: _showFavoritesOnly ? 'Show all items' : 'Show favorites',
-            icon: Icon(
-              _showFavoritesOnly ? Icons.favorite : Icons.favorite_border,
-            ),
+            icon: Icon(Icons.logout),
             onPressed: () {
-              setState(() => _showFavoritesOnly = !_showFavoritesOnly);
+              AuthService().signOut();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => LoginPage()),
+              );
             },
           ),
         ],
